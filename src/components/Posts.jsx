@@ -5,6 +5,7 @@ import Form from "./Form";
 
 const Posts = () => {
   const [postData, setPostData] = useState([]);
+  const [updateDataApi, setUpdateDataApi] = useState({});
 
   const getPostData = async () => {
     try {
@@ -31,6 +32,10 @@ const Posts = () => {
     }
   };
 
+  const handleUpdatePost = (data) => {
+    setUpdateDataApi(data);
+  };
+
   useEffect(() => {
     getPostData();
   }, []);
@@ -38,7 +43,12 @@ const Posts = () => {
   return (
     <>
       <section className="section-form">
-        <Form postData={postData} setPostData={setPostData} />
+        <Form
+          postData={postData}
+          setPostData={setPostData}
+          updateDataApi={updateDataApi}
+          setUpdateDataApi={setUpdateDataApi}
+        />
       </section>
       <section className="section-post">
         <ol>
@@ -46,7 +56,7 @@ const Posts = () => {
             <li key={data.id}>
               <p>Title: {data.title}</p>
               <p>Body: {data.body}</p>
-              <button>Edit</button>
+              <button onClick={() => handleUpdatePost(data)}>Edit</button>
               <button
                 className="btn-delete"
                 onClick={() => handleDeletePost(data.id)}

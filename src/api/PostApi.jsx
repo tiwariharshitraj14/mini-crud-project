@@ -18,3 +18,8 @@ export const deletePost = (id) => {
 export const createPost = (post) => {
   return api.post("/posts", post);
 };
+
+// update method
+export const updatePost = (id, post) => {
+  return api.put(`/posts/${id}`, post);
+};
